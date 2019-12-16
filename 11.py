@@ -117,7 +117,7 @@ field = np.zeros((200,200),dtype=np.int)
 painted = np.zeros((200,200),dtype=np.int)
 x = 100
 y = 100
-field[x,y] = 1
+field[x,y] = 0
 d = [0,1]
 
 while 1:
@@ -153,3 +153,5 @@ print(len(np.where(painted==1)[0]))
 
 from matplotlib import pyplot as plt
 plt.pcolor(field[75:150,90:110].T)
+plt.figure()
+plt.pcolor(field.T[50:150,50:150])
