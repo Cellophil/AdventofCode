@@ -1,23 +1,25 @@
 import numpy as np
 input = []
+# from numba import jitclass
 
+# @jitclass
 class intcomputer():
 
-    def __init__(self,input0,FLAGS=[],BASE=0,extramemory=10000):
+    def __init__(self,input0,FLAGS=[],BASE=0,extramemory=100000):
         
         input0 = [np.int64(s) for s in input0.split(',')]
         self.program0 = np.append(input0,np.zeros(np.int64(extramemory),dtype=np.int64))
         self.reset()
-        self.input = []
-        self.output = []
-        self.BASE = 0
-        self.REQUIRE_INPUT = False
-        self.OUTPUT_AVAILABLE = False
 
     def reset(self):
         self.pos = 0
-        self.program = self.program0
+        self.program = self.program0.copy()
         self.ACTIVE = True
+        self.BASE = 0
+        self.REQUIRE_INPUT = False
+        self.OUTPUT_AVAILABLE = False
+        self.input = []
+        self.output = []
 
     def get_opcode_and_index(self):
         s = str(self.program[self.pos])
@@ -67,8 +69,8 @@ class intcomputer():
             self.step()
             if self.REQUIRE_INPUT:
                 return 'require input'
-            if n>10000:
-                raise Exception('10000 steps, no output/input/end... fishy')
+            if n>100000:
+                raise Exception('100000 steps, no output/input/end... fishy')
 
         if self.output[0] == '99':
             return 'program terminated'

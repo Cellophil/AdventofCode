@@ -1,10 +1,10 @@
 import numpy as np
 from math import gcd
 
-if 1:
+if 0:
     astro = astro0.copy()
 else:
-    with open('10_example3.txt','r') as f:
+    with open('10.txt','r') as f:
         astro_list = []
         for l in f.readlines():
             astro_list.append([s for s in l.replace('.','0').replace('X','2').replace('#','1').replace('\n','')])
@@ -103,5 +103,6 @@ while 1:
             c[x,y] = 0
             hit += 1
             if hit == 200:
+                print('hit 200:')
                 print(x,y)
                 
